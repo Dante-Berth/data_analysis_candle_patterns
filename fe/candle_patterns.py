@@ -1,6 +1,4 @@
 import pandas as pd
-
-
 class idle_patterns:
     def __init__(self, dataframe, ohlc=None):
         super(idle_patterns, self).__init__()
