@@ -26,10 +26,7 @@ def opener_dataframe(PATH:str="../Data/ETHUSDT-5m.zip")->pd.DataFrame:
     if "open_date" in df.columns:
         df["open_date"] = pd.to_datetime(df["open_date"], errors='coerce').dt.strftime('%Y-%m-%d %H:%M:%S')
         df["open_time"] = pd.to_datetime(df['open_date'], format='%d.%m.%Y %H:%M:%S.%f', errors='coerce').astype('int64')/10**6
-    elif "gmt time" in df.columns:
-        df['open_date'] = pd.to_datetime(df['gmt time'], format='%d.%m.%Y %H:%M:%S.%f', errors='coerce').dt.strftime('%Y-%m-%d %H:%M:%S')
-        df["open_time"] =  pd.to_datetime(df['gmt time'], format='%d.%m.%Y %H:%M:%S.%f', errors='coerce').astype('int64')/10**6
-        df = df.drop("gmt time", axis=1)
+
     else:
         pass
 
@@ -79,7 +76,7 @@ def filter_dataframe_by_date_range(dataframe:pd.DataFrame,begin_date:Optional[st
 
 
 if __name__ == "__main__":
-    PATH = "../Data/ETHUSDT-5m.zip"
+    PATH = "../Data/binance-ETHUSDT-5m.pkl"
     df = opener_dataframe(PATH)
     df = filter_dataframe_by_date_range(df,begin_date="2023-04-03",end_date="2023-05-06")
     print(df.head())
